@@ -6,7 +6,7 @@
 /*   By: joagosti <joagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 12:10:10 by joagosti          #+#    #+#             */
-/*   Updated: 2021/06/25 20:41:48 by joagosti         ###   ########.fr       */
+/*   Updated: 2021/06/25 20:45:48 by joagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ void		delete_top(t_pile *pile);
 void		delete_bottom(t_pile *pile);
 
 /* ft_medians.c */
+t_argument	*ft_sort_int_tab(t_argument argument);
+int			ft_median(int argc);
 
 /* ft_split.c */
 int			ft_word_count(char *str, char c);

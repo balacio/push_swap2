@@ -6,7 +6,7 @@
 /*   By: joagosti <joagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 19:09:54 by joagosti          #+#    #+#             */
-/*   Updated: 2021/06/25 20:24:19 by joagosti         ###   ########.fr       */
+/*   Updated: 2021/07/09 17:20:43 by joagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,24 +30,16 @@ int	ft_atoi_2(const char *str)
 	{
 		res = res * 10 + (*str - 48);
 		if (res > INT_MAX || res < INT_MIN)
-		{
-			// error_print();
-			write(2, "Error\n", 6);
-			exit(2);
-		}
+			print_error();
 		++str;
 	}
 	if ((*str && !('0' <= *str && *str <= '9')))
-	{
-		// error_print();
-		write(2, "Error\n", 6);
-		exit(2);
-	}
+		print_error();
 	res = res * neg;
 	return (res);
 }
 
-char		*ft_strdup(const char *s)
+char	*ft_strdup(const char *s)
 {
 	int		i;
 	char	*dest;
@@ -66,11 +58,11 @@ char		*ft_strdup(const char *s)
 		i++;
 	}
 	dest[i] = ' ';
-	dest[i+1] = '\0';
+	dest[i + 1] = '\0';
 	return (dest);
 }
 
-char		*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
 	size_t	len;
 	size_t	i;
@@ -80,26 +72,25 @@ char		*ft_strjoin(char const *s1, char const *s2)
 	if (s1 && s2)
 	{
 		len = ft_strlen(s1) + ft_strlen(s2) + 1;
-		i = 0;
+		i = -1;
 		j = 0;
-		if ((str = (char *)malloc(sizeof(*str) * (len + 1))))
+		str = (char *)malloc(sizeof(*str) * (len + 1));
+		if (!str)
+			exit(2);
 		{
-			while (s1[i])
-			{
+			while (s1[++i])
 				str[i] = s1[i];
-				i++;
-			}
 			while (s2[j])
 				str[i++] = s2[j++];
 			str[i] = ' ';
-			str[i+1] = '\0';
+			str[i + 1] = '\0';
 			return (str);
 		}
 	}
 	return (NULL);
 }
 
-size_t		ft_strlen(const char *s)
+size_t	ft_strlen(const char *s)
 {
 	size_t	i;
 

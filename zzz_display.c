@@ -1,3 +1,5 @@
+/* ZZZ DISPLAY */
+
 #include "push_swap.h"
 
 void	print_pile(t_pile *pile)
@@ -11,7 +13,7 @@ void	print_pile(t_pile *pile)
 	current = pile->first;
 	while (current != NULL)
 	{
-		printf("%d -> ", current->nb);
+		printf("nb: %d\n", current->nb);
 		current = current->next;
 		i++;
 	}

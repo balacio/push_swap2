@@ -6,7 +6,7 @@
 /*   By: joagosti <joagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 12:10:10 by joagosti          #+#    #+#             */
-/*   Updated: 2021/06/25 20:45:48 by joagosti         ###   ########.fr       */
+/*   Updated: 2021/07/09 19:45:23 by joagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,48 +20,55 @@
 
 typedef struct s_argument
 {
-	char		**arg;
-	int			*tab;
-	int			nb;
-	int			med1;
-	int			med2;
-	int			med3;
-}				t_argument;
+	char	**arg;
+	int		*tab;
+	int		*tab_sort;
+	int		size;
+	int		pivot1;
+}			t_argument;
 
-typedef struct 			s_element
+typedef struct s_element
 {
 	int					nb;
+	int					tag;
 	struct s_element	*next;
 }						t_element;
 
-typedef struct 		s_pile
+typedef struct s_pile
 {
-	t_element		*first;
-}					t_pile;
+	t_element	*first;
+	int			median;
+	int			size;
+	int			i;
+	int			*tab;
+}				t_pile;
 
-typedef struct 		s_piles
+typedef struct s_piles
 {
-	t_pile			*a;
-	t_pile			*b;
+	struct t_pile	*a;
+	struct t_pile	*b;
 }					t_piles;
 
 /* ft_argument.c */
-t_argument 	validate_argument(int argc, char **argv);
+t_argument	validate_argument(int argc, char **argv);
 t_argument	make_argument(int argc, char **argv);
+//t_argument	find_medians(t_argument argument);
 
 /* ft_error.c */
-int 		print_error(void);
+int			print_error(void);
 
 /* ft_list.c */
 t_pile		*initialize_pile(t_pile *pile);
 void		insert_top(t_pile *pile, int new_nb);
-void		insert_bottom(t_pile *pile, t_element *current, int new_nb);
+// void		insert_bottom(t_pile *pile, t_element *current, int new_nb);
+void		insert_bottom(t_element *current, int new_nb);
 void		delete_top(t_pile *pile);
 void		delete_bottom(t_pile *pile);
 
-/* ft_medians.c */
-t_argument	*ft_sort_int_tab(t_argument argument);
-int			ft_median(int argc);
+/* ft_pile_median.c */
+t_pile		*pile_tab_median(t_pile *pile);
+t_pile		*ft_lstsize(t_pile *pile);
+t_pile		*pile_median(t_pile *pile);
 
 /* ft_split.c */
 int			ft_word_count(char *str, char c);
@@ -73,6 +80,28 @@ int			ft_atoi_2(const char *str);
 char		*ft_strdup(const char *s);
 char		*ft_strjoin(char const *s1, char const *s2);
 size_t		ft_strlen(const char *s);
+
+/* main.c */
+int			algo(t_pile pile_a, t_pile pile_b);
+
+/* push.c */
+void		push_a(t_pile *pile_a, t_pile *pile_b);
+void		push_b(t_pile *pile_a, t_pile *pile_b);
+
+/* r_rotate.c */
+void		r_rotate_a(t_pile *pile_a);
+void		r_rotate_b(t_pile *pile_b);
+void		r_rotate_r(t_pile *pile_a, t_pile *pile_b);
+
+/* rotate.c */
+void		rotate_a(t_pile *pile_a);
+void		rotate_b(t_pile *pile_b);
+void		rotate_r(t_pile *pile_a, t_pile *pile_b);
+
+/* swap.c */
+void		swap_a(t_pile *pile);
+void		swap_b(t_pile *pile);
+void		swap_s(t_pile *pile_a, t_pile *pile_b);
 
 /* zzz_display.c */
 void		print_pile(t_pile *pile);

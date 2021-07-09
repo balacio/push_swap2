@@ -6,7 +6,7 @@
 /*   By: joagosti <joagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 19:30:17 by joagosti          #+#    #+#             */
-/*   Updated: 2021/06/25 20:24:20 by joagosti         ###   ########.fr       */
+/*   Updated: 2021/07/09 18:25:26 by joagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ void	insert_top(t_pile *pile, int new_nb)
 	pile->first = new;
 }
 
-void	insert_bottom(t_pile *pile, t_element *current, int new_nb)
+// void	insert_bottom(t_pile *pile, t_element *current, int new_nb)
+void	insert_bottom(t_element *current, int new_nb)
 {
 	t_element	*new;
 

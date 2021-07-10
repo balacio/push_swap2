@@ -6,7 +6,7 @@
 /*   By: joagosti <joagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 12:10:10 by joagosti          #+#    #+#             */
-/*   Updated: 2021/07/09 19:45:23 by joagosti         ###   ########.fr       */
+/*   Updated: 2021/07/10 18:44:53 by joagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_argument
 typedef struct s_element
 {
 	int					nb;
-	int					tag;
+	int					tag; //0 if sorted
 	struct s_element	*next;
 }						t_element;
 
@@ -38,8 +38,8 @@ typedef struct s_pile
 {
 	t_element	*first;
 	int			median;
-	int			size;
-	int			i;
+	int			size; //all variables
+	int			i; //lstsize
 	int			*tab;
 }				t_pile;
 

@@ -6,7 +6,7 @@
 /*   By: joagosti <joagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 15:48:56 by joagosti          #+#    #+#             */
-/*   Updated: 2021/07/09 19:36:21 by joagosti         ###   ########.fr       */
+/*   Updated: 2021/07/12 14:58:57 by joagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_pile	*pile_tab_median(t_pile *pile)
 
 	if (pile == NULL)
 		exit(EXIT_FAILURE);
-	pile = ft_lstsize(pile);
+	ft_lstsize(pile);
 	pile->tab = malloc(pile->size * sizeof(int));
 	if (!pile->tab)
 		exit(2);
@@ -35,7 +35,7 @@ t_pile	*pile_tab_median(t_pile *pile)
 	return (pile);
 }
 
-t_pile	*ft_lstsize(t_pile *pile)
+void	ft_lstsize(t_pile *pile)
 {
 	int			i;
 	t_element	*current;
@@ -48,7 +48,6 @@ t_pile	*ft_lstsize(t_pile *pile)
 		i++;
 	}
 	pile->size = i;
-	return (pile);
 }
 
 t_pile	*pile_median(t_pile *pile)

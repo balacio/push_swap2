@@ -6,7 +6,7 @@
 /*   By: joagosti <joagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 19:30:17 by joagosti          #+#    #+#             */
-/*   Updated: 2021/07/10 13:35:35 by joagosti         ###   ########.fr       */
+/*   Updated: 2021/07/12 15:24:00 by joagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,15 @@ t_pile	*initialize_pile(t_pile *pile)
 	return (pile);
 }
 
-void	insert_top(t_pile *pile, int new_nb)
+void	insert_top(t_pile *pile, t_element actuel)
 {
 	t_element	*new;
 
 	new = (t_element *)malloc(sizeof (t_element));
 	if (!new)
 		exit(EXIT_FAILURE);
-	new->nb = new_nb;
+	new->nb = actuel.nb;
+	new->tag = actuel.tag;
 	new->next = pile->first;
 	pile->first = new;
 }
@@ -45,6 +46,7 @@ void	insert_bottom(t_element *current, int new_nb)
 	if (!new)
 		exit(EXIT_FAILURE);
 	new->nb = new_nb;
+	new->tag = current->tag;
 	new->next = NULL;
 	current->next = new;
 }

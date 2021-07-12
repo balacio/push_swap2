@@ -6,7 +6,7 @@
 /*   By: joagosti <joagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 17:56:11 by joagosti          #+#    #+#             */
-/*   Updated: 2021/07/10 18:44:51 by joagosti         ###   ########.fr       */
+/*   Updated: 2021/07/12 18:31:04 by joagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,79 +22,91 @@ int main(int argc, char **argv)
 
 	pile_a = NULL;
 	pile_b = NULL;
+	printf("\nArg Valid\n"); /* delete */
 	argument = validate_argument(argc, argv);
+	printf("\nInit Pile A\n"); /* delete */
 	pile_a = initialize_pile(pile_a);
+	printf("\nInit Pile B\n"); /* delete */
 	pile_b = initialize_pile(pile_b);
 	i = argument.size;
+	printf("\nCreate Pile A\n"); /* delete */
 	while (i-- > 0)
-		insert_top(pile_a, argument.tab[i]);
+		create_pile(pile_a, argument.tab[i]);
 	current = pile_a->first;
+	printf("\nInit Tag\n"); /* delete */
 	while (current != NULL)
 	{
 		current->tag = -1;
-		current = pile_a->first->next;
+		current = current->next;
 	}
 	printf("\nPILE A\n"); /* delete */
 	print_pile(pile_a); /* delete */
-	// pile_tab_median(pile_a); /* delete */
-	// printf("median = %d\n", pile_a->median); /* delete */
 	printf("\nALGOOOOOO!!!\n\n");
 	if (pile_a->first == NULL)
+	{
+		printf("\nExit here 3\n"); /* delete */
 		exit(2);
-	algo(*pile_a, *pile_b);
+	}
+	algo(pile_a, pile_b);
 	return(0);
 }
 
-int	algo(t_pile pile_a, t_pile pile_b)
+int	algo(t_pile *pile_a, t_pile *pile_b)
 {
 	t_element	*current_a;
 	t_element	*current_b;
-	int			i;
+
+	current_a = pile_a->first;
+	current_b = pile_b->first;
+	pile_a->size = ft_lstsize_OG(current_a);
+	printf("list size pile A = %d\n", pile_a->size);
+	pile_b->size = ft_lstsize_OG(current_b);
+	printf("list size pile B = %d\n", pile_b->size);
+	sort_pile(pile_a, pile_b, current_a);
+	printf("\nPILE A\n"); /* delete */
+	print_pile(pile_a); /* delete */
+	printf("PILE B\n"); /* delete */
+	print_pile(pile_b); /* delete */
+	ft_lstsize(pile_b);
+	if (pile_b->size == 0)
+	{
+		printf("\nExit here 1\n"); /* delete */
+		exit (0);
+	}
+	else 
+		algo(pile_a, pile_b);
+	return (0);
+}
+
+void	sort_pile(t_pile *pile_a, t_pile *pile_b, t_element *current_a)
+{
+	int	i;
 
 	i = 0;
-	current_a = pile_a.first;
-	current_b = pile_b.first;
-	pile_a = *ft_lstsize(&pile_a);
-	if (pile_a.size > 3)
+	if (pile_a->size > 2)
 	{
-		pile_tab_median(&pile_a);
-		while (current_a != NULL && pile_a.i > i)
+		pile_tab_median(pile_a);
+		while (current_a != NULL && pile_a->i > i)
 		{
-			if (current_a->nb < pile_a.median)
-			{
-				push_b(&pile_a, &pile_b);
-			}
+			if (current_a->nb <= pile_a->median && current_a->tag!=0)
+				push_b(pile_a, pile_b);
 			else
-			{
-				rotate_a(&pile_a);
-			}
+				rotate_a(pile_a);
 			current_a = current_a->next;
 			i++;
 		}
 	}
 	else
 	{
-		current_a = pile_a.first;
-		// while (current_a != NULL)
-		// {
-			// if (current_a < current_a->next && current_a->next < current_a->next->next)
-			if (current_a > current_a->next)
-				swap_a(&pile_a);
-			if (current_a > current_a->next->next)
-				r_rotate_a(&pile_a);
-			if (current_a->nb < current_a->next->nb < current_a->next->next->nb)
-				exit (0);
-				// algo(pile_a, pile_b);
-		// }
+		current_a = pile_a->first;
 		current_a->tag = 0;
 		current_a->next->tag = 0;
-		current_a->next->next->tag = 0;
+		if (current_a->nb > current_a->next->nb)
+			swap_a(pile_a);
+		else 
+		{
+			printf("\nExit here 2\n"); /* delete */
+			exit(0);
+		}
 	}
-		// exit (0);
-	printf("\nPILE A\n"); /* delete */
-	print_pile(&pile_a); /* delete */
-	printf("PILE B\n"); /* delete */
-	print_pile(&pile_b); /* delete */
-	algo(pile_a, pile_b);
-	return (0);
 }

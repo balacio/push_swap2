@@ -6,7 +6,7 @@
 /*   By: joagosti <joagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 11:41:25 by joagosti          #+#    #+#             */
-/*   Updated: 2021/07/09 19:21:57 by joagosti         ###   ########.fr       */
+/*   Updated: 2021/07/12 15:23:56 by joagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	r_rotate_a(t_pile *pile_a)
 	while (actuel->next != NULL)
 		actuel = actuel->next;
 	swap = actuel->nb;
-	insert_top(pile_a, swap);
+	insert_top(pile_a, *actuel);
 	delete_bottom(pile_a);
 	// write(1, "rra\n", 4); /* send to chained list */
 }
@@ -31,15 +31,14 @@ void	r_rotate_a(t_pile *pile_a)
 void	r_rotate_b(t_pile *pile_b)
 {
 	t_element	*actuel;
-	int			swap;
+	// int			swap;
 
 	if (pile_b == NULL)
 		exit(EXIT_FAILURE);
 	actuel = pile_b->first;
 	while (actuel->next != NULL)
 		actuel = actuel->next;
-	swap = actuel->nb;
-	insert_top(pile_b, swap);
+	insert_top(pile_b, *actuel);
 	delete_bottom(pile_b);
 	// write(1, "rrb\n", 4); /* send to chained list */
 }

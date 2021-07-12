@@ -6,7 +6,7 @@
 /*   By: joagosti <joagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 12:10:10 by joagosti          #+#    #+#             */
-/*   Updated: 2021/07/10 18:44:53 by joagosti         ###   ########.fr       */
+/*   Updated: 2021/07/12 17:16:14 by joagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,36 +38,48 @@ typedef struct s_pile
 {
 	t_element	*first;
 	int			median;
-	int			size; //all variables
-	int			i; //lstsize
+	int			size; //# all variables
+	int			i; //current pile size
 	int			*tab;
 }				t_pile;
 
-typedef struct s_piles
+// typedef struct s_piles
+// {
+// 	struct t_pile	*a;
+// 	struct t_pile	*b;
+// }					t_piles;
+
+typedef struct s_move
 {
-	struct t_pile	*a;
-	struct t_pile	*b;
-}					t_piles;
+	char			move;
+	struct s_move	*next;
+}					t_move;
 
 /* ft_argument.c */
 t_argument	validate_argument(int argc, char **argv);
 t_argument	make_argument(int argc, char **argv);
-//t_argument	find_medians(t_argument argument);
+void		create_pile(t_pile *pile, int new_nb);
 
 /* ft_error.c */
 int			print_error(void);
 
 /* ft_list.c */
 t_pile		*initialize_pile(t_pile *pile);
-void		insert_top(t_pile *pile, int new_nb);
+void		insert_top(t_pile *pile, t_element actuel);
 // void		insert_bottom(t_pile *pile, t_element *current, int new_nb);
 void		insert_bottom(t_element *current, int new_nb);
 void		delete_top(t_pile *pile);
 void		delete_bottom(t_pile *pile);
 
+/* ft_lstsize.c */
+int			ft_lstsize_OG(t_element *lst);
+
+/* ft_move.c */
+void		insert_bottom_res(t_move *current, char new_move);
+
 /* ft_pile_median.c */
 t_pile		*pile_tab_median(t_pile *pile);
-t_pile		*ft_lstsize(t_pile *pile);
+void		ft_lstsize(t_pile *pile);
 t_pile		*pile_median(t_pile *pile);
 
 /* ft_split.c */
@@ -82,7 +94,8 @@ char		*ft_strjoin(char const *s1, char const *s2);
 size_t		ft_strlen(const char *s);
 
 /* main.c */
-int			algo(t_pile pile_a, t_pile pile_b);
+int			algo(t_pile *pile_a, t_pile *pile_b);
+void		sort_pile(t_pile *pile_a, t_pile *pile_b, t_element *current_a);
 
 /* push.c */
 void		push_a(t_pile *pile_a, t_pile *pile_b);

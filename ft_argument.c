@@ -6,7 +6,7 @@
 /*   By: joagosti <joagosti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 17:06:54 by joagosti          #+#    #+#             */
-/*   Updated: 2021/07/09 16:30:57 by joagosti         ###   ########.fr       */
+/*   Updated: 2021/07/12 15:33:08 by joagosti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,14 @@ t_argument	make_argument(int argc, char **argv)
 	return (argument);
 }
 
-/*t_argument	find_medians(t_argument argument)
+void	create_pile(t_pile *pile, int new_nb)
 {
-	int	i;
+	t_element	*new;
 
-	i = -1;
-	argument.tab_sort = malloc((argument.size) * sizeof(int));
-	if (!argument.tab_sort)
-		exit(2);
-	while (++i < argument.size)
-		argument.tab_sort[i] = argument.tab[i];
-	argument = ft_find_median(argument);
-	return (argument);
-}*/
+	new = (t_element *)malloc(sizeof (t_element));
+	if (!new)
+		exit(EXIT_FAILURE);
+	new->nb = new_nb;
+	new->next = pile->first;
+	pile->first = new;
+}

@@ -13,7 +13,7 @@ void	print_pile(t_pile *pile)
 	current = pile->first;
 	while (current != NULL)
 	{
-		printf("%d -> ", current->nb);
+		printf("[%d | %d] -> ", current->nb, current->tag);
 		current = current->next;
 		i++;
 	}
